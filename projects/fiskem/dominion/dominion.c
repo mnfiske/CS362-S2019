@@ -1332,5 +1332,6 @@ int playAdventurer()
       }
       return 0;
 }
+//test
 //end of dominion.c
 
