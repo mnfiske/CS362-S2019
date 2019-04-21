@@ -667,7 +667,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card ) 
   {
     case adventurer:
-      return playAdventurer(currentPlayer, state, handPos);
+      return playAdventurer(currentPlayer, state, handPos, temphand);
 			
     case council_room:
       return playCouncilRoom(currentPlayer, state, handPos);
@@ -1258,9 +1258,10 @@ int updateCoins(int player, struct gameState *state, int bonus)
   return 0;
 }
 
-int playAdventurer(int currentPlayer, struct gameState *state, int handPos)
+int playAdventurer(int currentPlayer, struct gameState *state, int handPos, int[] temphand)
 {
   int drawntreasure = 0;
+  int z = 0;
 
   while(drawntreasure<2)
   {
@@ -1269,7 +1270,7 @@ int playAdventurer(int currentPlayer, struct gameState *state, int handPos)
       shuffle(currentPlayer, state);
     }
     drawCard(currentPlayer, state);
-    cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
+    int cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
     if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
     {
       drawntreasure++;
@@ -1302,7 +1303,7 @@ int playCouncilRoom(int currentPlayer, struct gameState *state, int handPos)
       state->numBuys++;
 			
       //Each other player draws a card
-      for (i = 0; i < state->numPlayers; i++)
+      for (int i = 0; i < state->numPlayers; i++)
       {
         if ( i != currentPlayer )
           {
@@ -1319,7 +1320,7 @@ int playCouncilRoom(int currentPlayer, struct gameState *state, int handPos)
 int playSmithy(int currentPlayer, struct gameState *state, int handPos)
 {
   //+3 Cards
-  for (i = 0; i < 3; i++)
+  for (int i = 0; i < 3; i++)
 	{
 	  drawCard(currentPlayer, state);
 	}
