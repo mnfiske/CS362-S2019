@@ -1258,7 +1258,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
   return 0;
 }
 
-int playAdventurer(int currentPlayer, struct gameState *state, int handPos, int[] temphand)
+int playAdventurer(int currentPlayer, struct gameState *state, int handPos, int temphand[])
 {
   int drawntreasure = 0;
   int z = 0;
