@@ -32,7 +32,6 @@ int main() {
     int playedNum = 1;
     int gainedCards = 2;
     int handPos = 0;
-    int discardNum = 1;
     int play;
     int otherPlayer = 1;
     int orig2ndPlayerDeckCount;

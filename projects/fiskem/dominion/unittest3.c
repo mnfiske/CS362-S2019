@@ -40,19 +40,15 @@ int main() {
     char *test = malloc(256);
     int origVictoryCount = 0;
     int origKingdomCount = 0;
-    int origDiscards;
     int origBuys;
     int playedNum = 1;
     int gainedCards = 4;
     int otherPlayerGainedCards = 1;
     int addedBuys = 1;
     int handPos = 0;
-    int discardNum = 1;
     int play;
     int kingdomCount;
     int playedCount;
-    int empty = 0;
-    //int test2DeckCount;
 
     // initialize a new game
     initializeGame(numPlayer, k, seed, &initialG);

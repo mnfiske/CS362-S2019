@@ -31,7 +31,6 @@ int main() {
     int playedNum = 1;
     int gainedCards = 2;
     int handPos = 0;
-    int discardNum = 1;
     int play;
     int otherPlayer = 1;
     int orig2ndPlayerDeckCount;
@@ -39,11 +38,9 @@ int main() {
     char *test = malloc(256);
     int origVictoryCount = 0;
     int origKingdomCount = 0;
-    int origDiscards;
     int kingdomCount;
     int playedCount;
     int empty = 0;
-    int test2DeckCount;
     int choice1 = 0;
     int choice2 = 0;
     int choice3 = 0;

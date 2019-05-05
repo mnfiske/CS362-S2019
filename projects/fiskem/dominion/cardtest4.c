@@ -28,9 +28,7 @@ int main() {
     int deckCount = 0;
     int origDeckCount;
     int playedNum = 1;
-    int gainedCards = 0;
     int handPos = 5;
-    int discardNum = 1;
     int play;
     int otherPlayer = 1;
     int orig2ndPlayerDeckCount;
@@ -42,8 +40,6 @@ int main() {
     int playedCount;
     int bonus = 0;
     int empty = 0;
-    int numCards = 5;
-    int handDiff = 0;
     int choice1 = 0;
     int choice2 = 0;
     int choice3 = 0;

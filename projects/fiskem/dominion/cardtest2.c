@@ -30,7 +30,6 @@ int main() {
     int playedNum = 1;
     int gainedCards = 2;
     int handPos = 0;
-    int discardNum = 1;
     int play;
     int otherPlayer = 1;
     int orig2ndPlayerDeckCount;
@@ -40,7 +39,6 @@ int main() {
     int origKingdomCount = 0;
     int kingdomCount;
     int playedCount;
-    int temphand[MAX_HAND];
     int bonus = 0;
     int empty = 0;
     int numCards = 5;
