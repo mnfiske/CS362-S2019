@@ -89,10 +89,14 @@ int main() {
     test = "orig2ndPlayerDeckCount == G.deckCount[otherPlayer]";
     assertTrue(orig2ndPlayerDeckCount == G.deckCount[otherPlayer], __LINE__, test);
 
-    //Verify only one card discarded.
+    //Verify only one card added to played cards.
     playedCount = G.playedCardCount;
     test = "playedCount == playedNum";
     assertTrue(playedCount == playedNum, __LINE__, test);
+
+    //Verify non-treasure cards in the deck were discarded
+    test = "(origDeckCount - (G.handCount[currentPlayer] - origHandCount)) == G.discardCount[currentPlayer]";
+    assertTrue((origDeckCount - (G.handCount[currentPlayer] - origHandCount)) == G.discardCount[currentPlayer], __LINE__, test);
 
     //Verify two cards were added to the hand, and one was removed (b/c the Adventurer card was played and removed from the hand)
     test = "(origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer]";
@@ -132,7 +136,7 @@ int main() {
     //Set the deck cards to curse
     for (int i = 0; i < origDeckCount; i++)
     {
-      G.deck[currentPlayer][i] = gold;
+      G.deck[currentPlayer][i] = curse;
     }
 
     //Set discard pile to have 5 gold cards
@@ -154,12 +158,12 @@ int main() {
     test = "orig2ndPlayerDeckCount == G.deckCount[otherPlayer]";
     assertTrue(orig2ndPlayerDeckCount == G.deckCount[otherPlayer], __LINE__, test);
 
-    //Verify only one card discarded.
+    //Verify only one card added to played cards.
     playedCount = G.playedCardCount;
     test = "playedCount == playedNum";
     assertTrue(playedCount == playedNum, __LINE__, test);
 
-    //Verify two cards were added to the hand, and one was removed (b/c the Adventurer card was played and removed from the hand)
+    //Verify one card was added to the hand, and one was removed (b/c the Adventurer card was played and removed from the hand)
     test = "(origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer]";
     assertTrue((origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer], __LINE__, test);
 
@@ -200,7 +204,7 @@ int main() {
     //Set the all cards but one to curse
     for (int i = 1; i < origDeckCount; i++)
     {
-      G.deck[currentPlayer][i] = silver;
+      G.deck[currentPlayer][i] = curse;
     }
 
     //Set one card to silver
@@ -218,7 +222,7 @@ int main() {
     test = "orig2ndPlayerDeckCount == G.deckCount[otherPlayer]";
     assertTrue(orig2ndPlayerDeckCount == G.deckCount[otherPlayer], __LINE__, test);
 
-    //Verify only one card discarded.
+    //Verify only one card added to played cards.
     playedCount = G.playedCardCount;
     test = "playedCount == playedNum";
     assertTrue(playedCount == playedNum, __LINE__, test);
@@ -227,11 +231,11 @@ int main() {
     test = "(origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer]";
     assertTrue((origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer], __LINE__, test);
 
-    //Verify that card is the silvers we set earlier
+    //Verify that card is the silver we set earlier
     test = "G.hand[currentPlayer][G.handCount[currentPlayer] - 1] == silver";
     assertTrue(G.hand[currentPlayer][G.handCount[currentPlayer] - 1] == silver, __LINE__, test);
 
-    //Verify the cards were removed from the player's deck
+    //Verify the card was removed from the player's deck
     deckCount = G.deckCount[currentPlayer];
     handDiff = G.handCount[currentPlayer] - origHandCount;
     test = "deckCount == (origDeckCount - handDiff)";

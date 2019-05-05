@@ -1,5 +1,5 @@
 /**********************************************************************
-One positive, one boundary, and one negative test of the Steward card.
+Two positive, one boundary, and one negative test of the Steward card.
 ***********************************************************************/
 
 #include "dominion.h"

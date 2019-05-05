@@ -180,7 +180,7 @@ int main() {
     assertTrue(origKingdomCount == kingdomCount, __LINE__, test);
 
     /******************************************************************************************************
-    TEST3 boundary ensure Smithy gets 1 card when 0 cards in deck, 2 in discards
+    TEST3 boundary ensure Smithy gets 1 card when 0 cards in deck, 1 in discards
     ******************************************************************************************************/
 
     printf("***************cardtest1.c TEST3 start***************\n");
