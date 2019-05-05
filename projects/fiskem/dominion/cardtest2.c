@@ -108,9 +108,8 @@ int main() {
 
     //Verify the cards were removed from the player's deck
     deckCount = G.deckCount[currentPlayer];
-    handDiff = G.handCount[currentPlayer] - origHandCount;
-    test = "deckCount == (origDeckCount - handDiff)";
-    assertTrue(deckCount == (origDeckCount - handDiff), __LINE__, test);
+    test = "deckCount == empty";
+    assertTrue(deckCount == empty, __LINE__, test);
 
     //Verify no state change occurred for victory cards
     test = "origVictoryCount = G.supplyCount[estate] + G.supplyCount[duchy] + G.supplyCount[province]";
@@ -167,15 +166,17 @@ int main() {
     test = "(origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer]";
     assertTrue((origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer], __LINE__, test);
 
-    //Verify those cards are the golds we set earlier
+    //Verify that card is the gold we set earlier
     test = "G.hand[currentPlayer][G.handCount[currentPlayer] - 1] == gold && G.hand[currentPlayer][G.handCount[currentPlayer] - 2] == gold";
     assertTrue(G.hand[currentPlayer][G.handCount[currentPlayer] - 1] == gold && G.hand[currentPlayer][G.handCount[currentPlayer] - 2] == gold, __LINE__, test);
 
-    //Verify the cards were removed from the player's deck
-    deckCount = G.deckCount[currentPlayer];
-    handDiff = G.handCount[currentPlayer] - origHandCount;
-    test = "deckCount == (origDeckCount - handDiff)";
-    assertTrue(deckCount == (origDeckCount - handDiff), __LINE__, test);
+    //Verify the cards from the original deck were discarded
+    test = "G.discardCount[currentPlayer] == origHandCount";
+    assertTrue(G.discardCount[currentPlayer] == origHandCount, __LINE__, test);
+
+    //Verify the deck is now the original discards minus the two treasure cards
+    test = "G.deckCount[currentPlayer] == numCards - gainedCards";
+    assertTrue(G.deckCount[currentPlayer] == numCards - gainedCards, __LINE__, test);
 
     //Verify no state change occurred for victory cards
     test = "origVictoryCount = G.supplyCount[estate] + G.supplyCount[duchy] + G.supplyCount[province]";
@@ -190,7 +191,7 @@ int main() {
 
     /******************************************************************************
     TEST3 boundry verify Adventurer will only pull treasure card if there is only
-    only in the deck/discards
+    one in the deck/discards
     ******************************************************************************/
 
     printf("***************cardtest2.c TEST3 start***************\n");
@@ -237,9 +238,8 @@ int main() {
 
     //Verify the card was removed from the player's deck
     deckCount = G.deckCount[currentPlayer];
-    handDiff = G.handCount[currentPlayer] - origHandCount;
-    test = "deckCount == (origDeckCount - handDiff)";
-    assertTrue(deckCount == (origDeckCount - handDiff), __LINE__, test);
+    test = "deckCount == empty";
+    assertTrue(deckCount == empty, __LINE__, test);
 
     //Verify no state change occurred for victory cards
     test = "origVictoryCount = G.supplyCount[estate] + G.supplyCount[duchy] + G.supplyCount[province]";
