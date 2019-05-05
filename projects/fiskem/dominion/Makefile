@@ -12,6 +12,36 @@ playdom: dominion.o playdom.c
 testDrawCard: testDrawCard.c dominion.o rngs.o
 	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
 
+testUpdateCoins: testUpdateCoins.c dominion.o rngs.o
+	gcc -o testUpdateCoins -g  testUpdateCoins.c dominion.o rngs.o $(CFLAGS)
+
+unittestresults.out: unittest1.c dominion.o rngs.o
+	echo "unittest1.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o unittest1 -g unittest1.c dominion.o rngs.o
+	./unittest1 &> unittestresults.out
+	echo "unittest2.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o unittest2 -g unittest2.c dominion.o rngs.o
+	./unittest2 &> unittestresults.out
+	echo "unittest3.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o unittest3 -g unittest3.c dominion.o rngs.o
+	./unittest3 &> unittestresults.out
+	echo "unittest4.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o unittest4 -g unittest4.c dominion.o rngs.o
+	./unittest4 &> unittestresults.out
+	echo "cardtest1.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o cardtest1 -g cardtest1.c dominion.o rngs.o
+	./cardtest1 &> unittestresults.out
+	echo "cardtest2.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o cardtest2 -g cardtest2.c dominion.o rngs.o
+	./cardtest2 &> unittestresults.out
+	echo "cardtest3.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o cardtest3 -g cardtest3.c dominion.o rngs.o
+	./cardtest3 &> unittestresults.out
+	echo "cardtest4.c:" >> unittestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o cardtest4 -g cardtest4.c dominion.o rngs.o
+	./cardtest4 &> unittestresults.out
+	gcov -b dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
 
 #########
 
