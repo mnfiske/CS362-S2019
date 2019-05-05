@@ -15,7 +15,7 @@ testDrawCard: testDrawCard.c dominion.o rngs.o
 testUpdateCoins: testUpdateCoins.c dominion.o rngs.o
 	gcc -o testUpdateCoins -g  testUpdateCoins.c dominion.o rngs.o $(CFLAGS)
 
-unittestresults.out: unittest1.c dominion.o rngs.o
+unittestresults: unittest1.c dominion.o rngs.o
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~unittest1.c~~~~~~~~~~~~~~~~~~~~~~~~~~" >> unittestresults.out
 	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o unittest1 -g unittest1.c dominion.o rngs.o
 	./unittest1 >> unittestresults.out
