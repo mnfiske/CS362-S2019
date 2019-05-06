@@ -162,11 +162,11 @@ int main() {
     test = "playedCount == playedNum";
     assertTrue(playedCount == playedNum, __LINE__, test);
 
-    //Verify one card was added to the hand, and one was removed (b/c the Adventurer card was played and removed from the hand)
+    //Verify two cards were added to the hand, and one was removed (b/c the Adventurer card was played and removed from the hand)
     test = "(origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer]";
     assertTrue((origHandCount + gainedCards - playedNum) == G.handCount[currentPlayer], __LINE__, test);
 
-    //Verify that card is the gold we set earlier
+    //Verify those cards are the gold we set earlier
     test = "G.hand[currentPlayer][G.handCount[currentPlayer] - 1] == gold && G.hand[currentPlayer][G.handCount[currentPlayer] - 2] == gold";
     assertTrue(G.hand[currentPlayer][G.handCount[currentPlayer] - 1] == gold && G.hand[currentPlayer][G.handCount[currentPlayer] - 2] == gold, __LINE__, test);
 
@@ -190,7 +190,7 @@ int main() {
     assertTrue(origKingdomCount == kingdomCount, __LINE__, test);
 
     /******************************************************************************
-    TEST3 boundry verify Adventurer will only pull treasure card if there is only
+    TEST3 boundry verify Adventurer will only pull one treasure card if there is only
     one in the deck/discards
     ******************************************************************************/
 
