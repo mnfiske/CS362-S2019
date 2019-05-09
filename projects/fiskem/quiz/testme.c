@@ -39,13 +39,12 @@ char inputChar()
     {
       return ')';
     }
-    if (y == 8)
+    else
     {
       return ']';
     }
 
-
-    return '0';
+    return 0;
 }
 
 char *inputString()
