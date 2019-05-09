@@ -43,6 +43,11 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~gcov info~~~~~~~~~~~~~~~~~~~~~~~~~~" >> unittestresults.out
 	gcov -b dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
+	
+randomtestresults: randomtestadventurer.c  dominion.o rngs.o
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~randomtestadventurer.c~~~~~~~~~~~~~~~~~~~~~~~~~~" >> randomtestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o
+	./randomtestadventurer >> randomtestresults.out
 
 #########
 
