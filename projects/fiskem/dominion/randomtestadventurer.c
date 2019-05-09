@@ -79,7 +79,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
     {
       int cardsAddedToDiscards = post->discardCount[p] - pre.discardCount[p];
       //Cards were removed from the deck
-      test = "pre.deckCount[p] < post->deckCount[p]";
+      test = "pre.deckCount[p] - cardsAddedToDiscards - gainedCards ==  post->deckCount[p]";
       assertTrue(pre.deckCount[p] - cardsAddedToDiscards - gainedCards ==  post->deckCount[p], __LINE__, test);
       //If the top two cards of the deck weren't treasures, the discard pile should have increased, otherwise should be the same
       int origDeckTopCardTreasure = pre.deck[p][pre.deckCount[p] - 1] == copper || pre.deck[p][pre.deckCount[p] - 1] == silver || pre.deck[p][pre.deckCount[p] - 1] == gold;
@@ -104,6 +104,54 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
       assertTrue(pre.deckCount[p] + pre.discardCount[p] - gainedCards == post->deckCount[p] + post->discardCount[p], __LINE__, test);
     }
   }
+  else if (numTreasuresDeck + numTreasuresDiscard == 1)
+  {
+    //Player gained one card to their hand
+    test = "pre.handCount[p] + 1 == post->handCount[p]";
+    assertTrue(pre.handCount[p] + 1 == post->handCount[p], __LINE__, test);
+    //That card is a treasure card
+    test = "post->hand[p][post->handCount[p] - 1] == copper || post->hand[p][post->handCount[p] - 1] == silver || post->hand[p][post->handCount[p] - 1] == gold";
+    assertTrue(post->hand[p][post->handCount[p] - 1] == copper || post->hand[p][post->handCount[p] - 1] == silver || post->hand[p][post->handCount[p] - 1] == gold, __LINE__, test);
+
+    if (numTreasuresDeck == 1)
+    {
+      int cardsAddedToDiscards = post->discardCount[p] - pre.discardCount[p];
+      //Cards were removed from the deck
+      test = "pre.deckCount[p] - cardsAddedToDiscards - 1 == post->deckCount[p]";
+      assertTrue(pre.deckCount[p] - cardsAddedToDiscards - 1 == post->deckCount[p], __LINE__, test);
+      //If the top card of the deck wasn't treasures, the discard pile should have increased, otherwise should be the same
+      int origDeckTopCardTreasure = pre.deck[p][pre.deckCount[p] - 1] == copper || pre.deck[p][pre.deckCount[p] - 1] == silver || pre.deck[p][pre.deckCount[p] - 1] == gold;
+      if (!(origDeckTopCardTreasure))
+      {
+        test = "pre.discardCount[p] > post->discardCount[p]";
+        assertTrue(pre.discardCount[p] > post->discardCount[p], __LINE__, test);
+      }
+      else
+      {
+        test = "pre.discardCount[p] == post->discardCount[p]";
+        assertTrue(pre.discardCount[p] == post->discardCount[p], __LINE__, test);
+      }
+    }
+    else
+    {
+      //One cards removed from combined deck and discards
+      test = "pre.deckCount[p] + pre.discardCount[p] - 1 == post->deckCount[p] + post->discardCount[p]";
+      assertTrue(pre.deckCount[p] + pre.discardCount[p] - 1 == post->deckCount[p] + post->discardCount[p], __LINE__, test);
+    }
+  }
+  //No treasures in deck
+  else
+  {
+    //No changes to hand
+    test = "pre.handCount[p] == post->handCount[p]";
+    assertTrue(pre.handCount[p] == post->handCount[p], __LINE__, test);
+    //All cards discarded
+    test = "post->deckCount[p] == 0";
+    assertTrue(post->deckCount[p] == 0, __LINE__, test);
+    test = "post->discardCount[p] == pre.deckCount[p] + pre.discardCount[p]";
+    assertTrue(post->discardCount[p] == pre.deckCount[p] + pre.discardCount[p], __LINE__, test);
+
+  }
   
 
   return 0;
@@ -111,7 +159,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
 }
 
 int main() {
-  int i, n, r, p, deckCount, discardCount, handCount;
+  int n, p;
 
   int k[10] = { adventurer, council_room, feast, gardens, mine,
          remodel, smithy, village, baron, great_hall };
@@ -152,7 +200,7 @@ int main() {
     }
     handPos = rand() % G.handCount[p];
     G.hand[p][handPos] = adventurer;
-    int play = checkAdventurer(p, &G, handPos, temphand);
+    checkAdventurer(p, &G, handPos, temphand);
   }
   return 0;
 }
