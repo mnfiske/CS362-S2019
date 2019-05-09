@@ -48,6 +48,9 @@ randomtestresults: randomtestadventurer.c  dominion.o rngs.o
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~randomtestadventurer.c~~~~~~~~~~~~~~~~~~~~~~~~~~" >> randomtestresults.out
 	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o
 	./randomtestadventurer >> randomtestresults.out
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~randomtestcard1.c~~~~~~~~~~~~~~~~~~~~~~~~~~" >> randomtestresults.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o
+	./randomtestcard1 >> randomtestresults.out
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~gcov info~~~~~~~~~~~~~~~~~~~~~~~~~~" >> randomtestresults.out
 	gcov -b dominion.c >> randomtestresults.out
 	cat dominion.c.gcov >> randomtestresults.out
