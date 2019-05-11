@@ -18,7 +18,7 @@ void assertTrue(int result, int line, char test[])
   }
 }
 
-int checkSmithy(int p, struct gameState *post, int handPos)
+int checkAdventurer(int p, struct gameState *post, int handPos)
 {
   char *test = malloc(256);
   int intendedGainedCards = 3;
@@ -126,7 +126,7 @@ int main() {
     }
     handPos = rand() % G.handCount[p];
     G.hand[p][handPos] = smithy;
-    checkSmithy(p, &G, handPos);
+    checkAdventurer(p, &G, handPos);
   }
   return 0;
 }
