@@ -14,7 +14,7 @@ void assertTrue(int result, int line, char test[])
 {
   if (result == 0)
   {
-    printf("cardtest2: cardtest2.c:%d: main Assertion '%s' failed\n", line, test);
+    printf("randomtestadventurer: randomtestadventurer.c:%d: main Assertion '%s' failed\n", line, test);
   }
 }
 
