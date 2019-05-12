@@ -50,8 +50,8 @@ int checkEmbargo(int p, struct gameState *post, int handPos, int choice1)
 
     //Verify the card was trashed
       //removed from hand
-    test = "preHand + 1 == postHand";
-    assertTrue(preHand + 1 == postHand, __LINE__, test);
+    test = "preHand - 1 == postHand";
+    assertTrue(preHand - 1 == postHand, __LINE__, test);
       //Not added to discards, deck, or played cards
     test = "preDeck == postDeck";
     assertTrue(preDeck == postDeck, __LINE__, test);
@@ -83,51 +83,6 @@ int checkEmbargo(int p, struct gameState *post, int handPos, int choice1)
     test = "pre.playedCardCount == post->playedCardCount";
     assertTrue(pre.playedCardCount == post->playedCardCount, __LINE__, test);
   }
-  
-
-  //To avoid having multiple tests fail due to a single bug that is explictly checked for (more than the intended
-  //number of cards being drawn), set variable to the actual cards drawn for checking things like the cards being
-  //drawn from the deck.
-  int gainedCards = postHand - preHand;
-  
-  //If deck had three or more cards, all cards should have come from the deck
-  if (preDeck >= gainedCards)
-  {
-    //Player gained three cards to their hand
-    test = "preHand + intendedGainedCoins == postHand";
-    assertTrue(preHand + intendedGainedCoins == postHand, __LINE__, test);
-    
-    test = "pre.deckCount[p] - gainedCards ==  postDeck";
-    assertTrue(pre.deckCount[p] - gainedCards ==  postDeck, __LINE__, test);
-    
-    //There shouldn't have been any discards
-    test = "pre.discardCount[p] == post->discardCount[p]";
-     assertTrue(pre.discardCount[p] == post->discardCount[p], __LINE__, test);
-    
-  }
-  //The discards should have been shuffled into the deck
-  else if (preDeck + pre.discardCount[p] >= gainedCards)
-  {
-    //Player gained three cards to their hand
-    test = "preHand + intendedGainedCoins == postHand";
-    assertTrue(preHand + intendedGainedCoins == postHand, __LINE__, test);
-    
-    //Two cards removed from combined deck and discards
-    test = "preDeck + pre.discardCount[p] - gainedCards == postDeck + post->discardCount[p]";
-    assertTrue(preDeck + pre.discardCount[p] - gainedCards == postDeck + post->discardCount[p], __LINE__, test);
-  }
-  //There weren't three cards to draw
-  else 
-  {
-    int available = preDeck + pre.discardCount[p];
-    //Player gained available cards to their hand
-    test = "preHand + available == postHand";
-    assertTrue(preHand + available == postHand, __LINE__, test);
-    
-    //Available cards removed from deck/discards
-    test = "postDeck == 0 && post->discardCount[p] == 0";
-    assertTrue(postDeck == 0 && post->discardCount[p] == 0, __LINE__, test);
-  }
 
   return 0;
 }
@@ -150,7 +105,7 @@ int main() {
 
   for (n = 0; n < 800; n++)
   {
-    printf("Test %d", n);
+    printf("Test %d\n", n);
 
     int k[10];
     //Choose ten kingdom cards to add to k
