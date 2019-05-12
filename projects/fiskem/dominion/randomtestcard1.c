@@ -38,49 +38,48 @@ int checkAdventurer(int p, struct gameState *post, int handPos)
   test = "r == 0";
   assertTrue(r == 0, __LINE__, test);
 
-  //To avoid having multiple tests fail due to a single bug that is explictly checked for (more than the intended
-  //number of cards being drawn), set variable to the actual cards drawn for checking things like the cards being
-  //drawn from the deck.
-  int gainedCards = postHand - preHand;
-  
   //If deck had three or more cards, all cards should have come from the deck
-  if (preDeck >= gainedCards)
+  if (preDeck >= intendedGainedCards)
   {
-    //Player gained three cards to their hand
-    test = "preHand + intendedGainedCards == postHand";
-    assertTrue(preHand + intendedGainedCards == postHand, __LINE__, test);
+    //Player gained three cards to their hand and discarded a card
+    test = "preHand + intendedGainedCards - 1 == postHand";
+    assertTrue(preHand + intendedGainedCards - 1 == postHand, __LINE__, test);
     
-    test = "pre.deckCount[p] - gainedCards ==  postDeck";
-    assertTrue(pre.deckCount[p] - gainedCards ==  postDeck, __LINE__, test);
+    //Those three cards came from the deck
+    test = "pre.deckCount[p] - intendedGainedCards ==  postDeck";
+    assertTrue(pre.deckCount[p] - intendedGainedCards ==  postDeck, __LINE__, test);
     
     //There shouldn't have been any discards
     test = "pre.discardCount[p] == post->discardCount[p]";
-     assertTrue(pre.discardCount[p] == post->discardCount[p], __LINE__, test);
-    
+    assertTrue(pre.discardCount[p] == post->discardCount[p], __LINE__, test);
   }
   //The discards should have been shuffled into the deck
-  else if (preDeck + pre.discardCount[p] >= gainedCards)
+  else if (preDeck + pre.discardCount[p] >= intendedGainedCards)
   {
     //Player gained three cards to their hand
-    test = "preHand + intendedGainedCards == postHand";
-    assertTrue(preHand + intendedGainedCards == postHand, __LINE__, test);
+    test = "preHand + intendedGainedCards - 1 == postHand";
+    assertTrue(preHand + intendedGainedCards - 1 == postHand, __LINE__, test);
     
     //Two cards removed from combined deck and discards
-    test = "preDeck + pre.discardCount[p] - gainedCards == postDeck + post->discardCount[p]";
-    assertTrue(preDeck + pre.discardCount[p] - gainedCards == postDeck + post->discardCount[p], __LINE__, test);
+    test = "preDeck + pre.discardCount[p] - intendedGainedCards == postDeck + post->discardCount[p]";
+    assertTrue(preDeck + pre.discardCount[p] - intendedGainedCards == postDeck + post->discardCount[p], __LINE__, test);
   }
   //There weren't three cards to draw
-  else 
+  else
   {
     int available = preDeck + pre.discardCount[p];
-    //Player gained available cards to their hand
-    test = "preHand + available == postHand";
-    assertTrue(preHand + available == postHand, __LINE__, test);
-    
+    //Player gained available cards to their hand and discarded one card
+    test = "preHand + available - 1 == postHand";
+    assertTrue(preHand + available - 1 == postHand, __LINE__, test);
+
     //Available cards removed from deck/discards
     test = "postDeck == 0 && post->discardCount[p] == 0";
     assertTrue(postDeck == 0 && post->discardCount[p] == 0, __LINE__, test);
   }
+
+  //Smithy should have been discarded to played cards
+  test = "post->playedCardCount == 1";
+  assertTrue(post->playedCardCount == 1, __LINE__, test);
 
   return 0;
 }
@@ -97,7 +96,7 @@ int main() {
   struct gameState G;
   initializeGame(2, k, seed, &G);
 
-  printf("Testing playAdventurer.\n");
+  printf("Testing playSmithy.\n");
 
   printf("RANDOM TESTS.\n");
 
@@ -106,10 +105,10 @@ int main() {
 
   for (n = 0; n < 800; n++)
   {
-    printf("Test %d", n);
+    printf("Test %d\n", n);
     p = rand() % 2;
     G.whoseTurn = p;
-    G.deckCount[p] = rand() % MAX_DECK;
+    G.deckCount[p] = rand() % 20;
     for (int i = 0; i < G.deckCount[p]; i++)
     {
       G.deck[p][i] = rand() % treasure_map;

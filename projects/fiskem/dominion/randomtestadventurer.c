@@ -86,8 +86,9 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
       int origDeck2ndCardTreasure = pre.deck[p][pre.deckCount[p] - 2] == copper || pre.deck[p][pre.deckCount[p] - 2] == silver || pre.deck[p][pre.deckCount[p] - 2] == gold;
       if (!(origDeckTopCardTreasure && origDeck2ndCardTreasure))
       {
+        //If the top two weren't treasures, some number of cards should have been discarded
         test = "pre.discardCount[p] > post->discardCount[p]";
-        assertTrue(pre.discardCount[p] > post->discardCount[p], __LINE__, test);
+        assertTrue(pre.discardCount[p] < post->discardCount[p], __LINE__, test);
       }
       else
       {
@@ -179,7 +180,7 @@ int main() {
 
   for (n = 0; n < 800; n++)
   {
-    printf("Test %d", n);
+    printf("Test %d\n", n);
     p = rand() % 2;
     G.whoseTurn = p;
     G.deckCount[p] = rand() % MAX_DECK;
