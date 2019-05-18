@@ -40,9 +40,6 @@ int checkEmbargo(int p, struct gameState *post, int handPos, int choice1)
     test = "r == 0";
     assertTrue(r == 0, __LINE__, test);
 
-    test = "playedNum == post->playedCardCount";
-    assertTrue(playedNum == post->playedCardCount, __LINE__, test);
-
     //Verify coins increased by two
     test = "pre.coins + 2 == post->coins";
     assertTrue(pre.coins + 2 == post->coins, __LINE__, test);
