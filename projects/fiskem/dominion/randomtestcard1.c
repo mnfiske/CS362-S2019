@@ -18,7 +18,7 @@ void assertTrue(int result, int line, char test[])
   }
 }
 
-int checkAdventurer(int p, struct gameState *post, int handPos)
+int checkSmithy(int p, struct gameState *post, int handPos)
 {
   char *test = malloc(256);
   int intendedGainedCards = 3;
@@ -26,6 +26,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos)
   struct gameState pre;
   memcpy(&pre, post, sizeof(struct gameState));
   int r;
+  int playedNum = 1;
 
   int preDeck = pre.deckCount[p];
   int preHand = pre.handCount[p];
@@ -37,6 +38,10 @@ int checkAdventurer(int p, struct gameState *post, int handPos)
 
   test = "r == 0";
   assertTrue(r == 0, __LINE__, test);
+
+  //Smithy should have been discarded to played cards
+  test = "post->playedCardCount == 1";
+  assertTrue(post->playedCardCount == 1, __LINE__, test);
 
   //If deck had three or more cards, all cards should have come from the deck
   if (preDeck >= intendedGainedCards)
@@ -56,11 +61,11 @@ int checkAdventurer(int p, struct gameState *post, int handPos)
   //The discards should have been shuffled into the deck
   else if (preDeck + pre.discardCount[p] >= intendedGainedCards)
   {
-    //Player gained three cards to their hand
+    //Player gained three cards to their hand and discarded a card
     test = "preHand + intendedGainedCards - 1 == postHand";
     assertTrue(preHand + intendedGainedCards - 1 == postHand, __LINE__, test);
     
-    //Two cards removed from combined deck and discards
+    //Three cards removed from combined deck and discards
     test = "preDeck + pre.discardCount[p] - intendedGainedCards == postDeck + post->discardCount[p]";
     assertTrue(preDeck + pre.discardCount[p] - intendedGainedCards == postDeck + post->discardCount[p], __LINE__, test);
   }
@@ -77,10 +82,6 @@ int checkAdventurer(int p, struct gameState *post, int handPos)
     assertTrue(postDeck == 0 && post->discardCount[p] == 0, __LINE__, test);
   }
 
-  //Smithy should have been discarded to played cards
-  test = "post->playedCardCount == 1";
-  assertTrue(post->playedCardCount == 1, __LINE__, test);
-
   return 0;
 }
 
@@ -89,7 +90,6 @@ int main() {
 
   int k[10] = { adventurer, council_room, feast, gardens, mine,
          remodel, smithy, village, baron, great_hall };
-  int temphand[MAX_HAND];
   int handPos = -1;
   int seed = rand() % 10000;
 
@@ -125,7 +125,7 @@ int main() {
     }
     handPos = rand() % G.handCount[p];
     G.hand[p][handPos] = smithy;
-    checkAdventurer(p, &G, handPos);
+    checkSmithy(p, &G, handPos);
   }
   return 0;
 }

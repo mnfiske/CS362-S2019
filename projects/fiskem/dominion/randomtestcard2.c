@@ -21,11 +21,11 @@ void assertTrue(int result, int line, char test[])
 int checkEmbargo(int p, struct gameState *post, int handPos, int choice1)
 {
   char *test = malloc(256);
-  int intendedGainedCoins = 3;
 
   struct gameState pre;
   memcpy(&pre, post, sizeof(struct gameState));
   int r;
+  int playedNum = 1;
 
   int preDeck = pre.deckCount[p];
   int preHand = pre.handCount[p];
@@ -39,6 +39,9 @@ int checkEmbargo(int p, struct gameState *post, int handPos, int choice1)
   {
     test = "r == 0";
     assertTrue(r == 0, __LINE__, test);
+
+    test = "playedNum == post->playedCardCount";
+    assertTrue(playedNum == post->playedCardCount, __LINE__, test);
 
     //Verify coins increased by two
     test = "pre.coins + 2 == post->coins";
@@ -90,9 +93,6 @@ int checkEmbargo(int p, struct gameState *post, int handPos, int choice1)
 int main() {
   int n, p;
 
-  
-  
-  int temphand[MAX_HAND];
   int handPos = -1;
   int seed = rand() % 10000;
 
