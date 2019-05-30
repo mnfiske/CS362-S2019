@@ -74,7 +74,7 @@ int main() {
                        G.supplyCount[mine] + G.supplyCount[remodel] + G.supplyCount[smithy] + G.supplyCount[village] +
                        G.supplyCount[baron] + G.supplyCount[great_hall];
 
-    //Call the playSmithy method
+    //Call the smithyEffect method
     play = cardEffect(smithy, empty, empty, empty, &G, handPos, &bonus);
     //Verify the method returned 0
     test = "play == 0";
@@ -141,7 +141,7 @@ int main() {
       G.supplyCount[mine] + G.supplyCount[remodel] + G.supplyCount[smithy] + G.supplyCount[village] +
       G.supplyCount[baron] + G.supplyCount[great_hall];
 
-    //Call the playSmithy method
+    //Call the smithyEffect method
     play = cardEffect(smithy, empty, empty, empty, &G, handPos, &bonus);
     //Verify the method returned 0
     test = "play == 0";
@@ -211,7 +211,7 @@ int main() {
     origDiscards = G.discardCount[currentPlayer];
     origDeckCount = G.deckCount[currentPlayer];
 
-    //Call the playSmithy method
+    //Call the smithyEffect method
     play = cardEffect(smithy, empty, empty, empty, &G, handPos, &bonus);
 
     //Verify the method returned 0

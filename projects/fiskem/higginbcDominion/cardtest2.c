@@ -77,7 +77,7 @@ int main() {
     G.deck[currentPlayer][1] = silver;
     G.deck[currentPlayer][0] = silver;
     
-    //Call the playAdventurer method
+    //Call the adventurerEffect method
     play = cardEffect(adventurer, empty, empty, empty, &G, handPos, &bonus);
     //Verify the method returned 0
     test = "play == 0";
@@ -145,7 +145,7 @@ int main() {
       G.deck[currentPlayer][i] = gold;
     }
 
-    //Call the playAdventurer method
+    //Call the adventurerEffect method
     play = cardEffect(adventurer, empty, empty, empty, &G, handPos, &bonus);
     //Verify the method returned 0
     test = "play == 0";
@@ -211,7 +211,7 @@ int main() {
     //Set one card to silver
     G.deck[currentPlayer][0] = silver;
 
-    //Call the playAdventurer method
+    //Call the adventurerEffect method
     play = cardEffect(adventurer, empty, empty, empty, &G, handPos, &bonus);
     //Verify the method returned 0
     test = "play == 0";

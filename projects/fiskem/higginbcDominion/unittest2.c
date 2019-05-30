@@ -69,8 +69,8 @@ int main() {
       G.deck[currentPlayer][i] = silver;
     }
     
-    //Call the playAdventurer method
-    play = playAdventurer(currentPlayer, &G, handPos, temphand);
+    //Call the adventurerEffect method
+    play = adventurerEffect(currentPlayer, &G, handPos, temphand);
     //Verify the method returned 0
     test = "play == 0";
     assertTrue(play == 0, __LINE__, test);
@@ -125,8 +125,8 @@ int main() {
       G.deck[currentPlayer][i] = gold;
     }
 
-    //Call the playAdventurer method
-    play = playAdventurer(currentPlayer, &G, handPos, temphand);
+    //Call the adventurerEffect method
+    play = adventurerEffect(currentPlayer, &G, handPos, temphand);
     //Verify the method returned 0
     test = "play == 0";
     assertTrue(play == 0, __LINE__, test);
@@ -181,8 +181,8 @@ int main() {
       G.deck[currentPlayer][i] = copper;
     }
 
-    //Call the playAdventurer method
-    play = playAdventurer(currentPlayer, &G, handPos, temphand);
+    //Call the adventurerEffect method
+    play = adventurerEffect(currentPlayer, &G, handPos, temphand);
     //Verify the method returned 0
     test = "play == 0";
     assertTrue(play == 0, __LINE__, test);

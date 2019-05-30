@@ -31,7 +31,7 @@ int checkSmithy(int p, struct gameState *post, int handPos)
   int preDeck = pre.deckCount[p];
   int preHand = pre.handCount[p];
 
-  r = playSmithy(p, post, handPos);
+  r = smithyEffect(p, post, handPos);
 
   int postDeck = post->deckCount[p];
   int postHand = post->handCount[p];
@@ -96,7 +96,7 @@ int main() {
   struct gameState G;
   initializeGame(2, k, seed, &G);
 
-  printf("Testing playSmithy.\n");
+  printf("Testing smithyEffect.\n");
 
   printf("RANDOM TESTS.\n");
 

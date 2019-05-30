@@ -52,7 +52,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
     }
   }
 
-  r = playAdventurer(p, post, handPos, temphand);
+  r = adventurerEffect(p, post, handPos, temphand);
 
   test = "r == 0";
   assertTrue(r == 0, __LINE__, test);
@@ -173,7 +173,7 @@ int main() {
   struct gameState G;
   initializeGame(2, k, seed, &G);
 
-  printf("Testing playAdventurer.\n");
+  printf("Testing adventurerEffect.\n");
 
   printf("RANDOM TESTS.\n");
 
