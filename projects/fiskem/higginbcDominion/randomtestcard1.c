@@ -24,6 +24,7 @@ int checkSmithy(int p, struct gameState *post, int handPos)
   int intendedGainedCards = 3;
 
   struct gameState pre;
+  pre.whoseTurn = p;
   memcpy(&pre, post, sizeof(struct gameState));
   int r;
   int playedNum = 1;
@@ -31,7 +32,7 @@ int checkSmithy(int p, struct gameState *post, int handPos)
   int preDeck = pre.deckCount[p];
   int preHand = pre.handCount[p];
 
-  r = smithyEffect(p, post, handPos);
+  r = smithyEffect(post, handPos);
 
   int postDeck = post->deckCount[p];
   int postHand = post->handCount[p];

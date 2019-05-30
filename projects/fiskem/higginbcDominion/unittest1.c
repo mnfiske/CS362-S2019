@@ -68,7 +68,7 @@ int main() {
                        G.supplyCount[baron] + G.supplyCount[great_hall];
 
     //Call the smithyEffect method
-    play = smithyEffect(currentPlayer, &G, handPos);
+    play = smithyEffect(&G, handPos);
     //Verify the method returned 0
     test = "play == 0";
     assertTrue(play == 0, __LINE__, test);
@@ -133,7 +133,7 @@ int main() {
     origDeckCount = G.deckCount[currentPlayer];
 
     //Call the smithyEffect method
-    play = smithyEffect(currentPlayer, &G, handPos);
+    play = smithyEffect(&G, handPos);
 
     //Verify the method returned 0
     test = "play == 0";
@@ -202,7 +202,7 @@ int main() {
     origDeckCount = G.deckCount[currentPlayer];
 
     //Call the smithyEffect method
-    play = smithyEffect(currentPlayer, &G, handPos);
+    play = smithyEffect(&G, handPos);
 
     //Verify the method returned 0
     test = "play == 0";

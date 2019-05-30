@@ -15,7 +15,7 @@ testDrawCard: testDrawCard.c dominion.o rngs.o
 testUpdateCoins: testUpdateCoins.c dominion.o rngs.o
 	gcc -o testUpdateCoins -g  testUpdateCoins.c dominion.o rngs.o $(CFLAGS)
 
-unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o
+unittestresults: unittest1.c unittest2.c cardtest1.c cardtest2.c dominion.o rngs.o
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~unittest1.c~~~~~~~~~~~~~~~~~~~~~~~~~~" >> unittestresults.out
 	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o unittest1 -g unittest1.c dominion.o rngs.o
 	./unittest1 >> unittestresults.out
@@ -32,7 +32,7 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs
 	gcov -b dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 	
-randomtestresults: randomtestadventurer.c  dominion.o rngs.o
+randomtestresults: randomtestadventurer.c randomtestcard1.c dominion.o rngs.o
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~randomtestadventurer.c~~~~~~~~~~~~~~~~~~~~~~~~~~" >> randomtestresults.out
 	gcc -fprofile-arcs -ftest-coverage -Wall -lm -std=c99 -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o
 	./randomtestadventurer >> randomtestresults.out

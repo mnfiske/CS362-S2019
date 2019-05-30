@@ -25,6 +25,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
   int playedNum = 1;
 
   struct gameState pre;
+  pre.whoseTurn = p;
   memcpy(&pre, post, sizeof(struct gameState));
   int r;
 
@@ -52,7 +53,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
     }
   }
 
-  r = adventurerEffect(p, post, handPos, temphand);
+  r = adventurerEffect(post);
 
   test = "r == 0";
   assertTrue(r == 0, __LINE__, test);
