@@ -643,7 +643,7 @@ int getCost(int cardNumber)
   return -1;
 }
 
-int adventurerEffect(struct gameState* state)
+int adventurerEffect(int handPos, struct gameState* state)
 {
 	int drawntreasure = 0;
 	int currentPlayer = whoseTurn(state);
@@ -651,7 +651,7 @@ int adventurerEffect(struct gameState* state)
 	int temphand[MAX_HAND];
 	int z = 0;	//counter for temp hand
 
-	while (drawntreasure <= 2) //bug - should be < 2, not <= 2
+	while (drawntreasure < 2) //bug - should be < 2, not <= 2
 	{
 		//if deck is empty, need to shuffle discard pile and add to deck
 		if (state->deckCount[currentPlayer] < 1)
@@ -679,6 +679,9 @@ int adventurerEffect(struct gameState* state)
 		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z-1];
 		z = z-1;
 	}
+
+  discardCard(handPos, currentPlayer, state, 0);
+
 	return 0;
 }
 
@@ -693,7 +696,7 @@ int smithyEffect(struct gameState* state, int handPos)
 	}
 			
 	//discard card from hand
-	discardCard(handPos, currentPlayer, state, 1);	//bug - should pass 0 as last parameter
+	discardCard(handPos, currentPlayer, state, 0);	//bug - should pass 0 as last parameter
 	return 0;
 }	
 
@@ -809,7 +812,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card ) 
     {
     case adventurer:
-	return adventurerEffect(state);
+	return adventurerEffect(handPos, state);
 		
     case council_room:
       //+4 Cards
@@ -904,7 +907,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	  return -1;
 	}
 
-      if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
+      if ( (getCost(state->hand[currentPlayer][choice1]) + 3) < getCost(choice2) )
 	{
 	  return -1;
 	}

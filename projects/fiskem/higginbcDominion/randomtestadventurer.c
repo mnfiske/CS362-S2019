@@ -53,7 +53,7 @@ int checkAdventurer(int p, struct gameState *post, int handPos, int temphand[])
     }
   }
 
-  r = adventurerEffect(post);
+  r = adventurerEffect(handPos, post);
 
   test = "r == 0";
   assertTrue(r == 0, __LINE__, test);
