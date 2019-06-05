@@ -45,7 +45,6 @@ protected void setUp() {
    
    public void testUnitTestIsValid() 
    {
-	   String path = UrlValidatorTest.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 	   /********************************************************************/
 	   /*Test with Allow all schemes*/
 	   /********************************************************************/
@@ -57,11 +56,8 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_validUrlSchemes));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-			   validUrls.add(_input.nextLine());	//writes the entire line to _array[i]
-		     //i++;
+			   validUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -81,8 +77,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalidUrlSchemes));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     invalidUrls.add(_input.nextLine());
 		   }
@@ -108,8 +102,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_valid2SlashUrlFile));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     valid2SlashUrls.add(_input.nextLine());
 		   }
@@ -131,8 +123,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalid2SlashUrlFile));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     invalid2SlashUrls.add(_input.nextLine());
 		   }
@@ -159,8 +149,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_validNoFragsUrlFile));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     validNoFragsUrls.add(_input.nextLine());
 		   }
@@ -182,8 +170,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalidNoFragsUrlFile));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     invalidNoFragsUrls.add(_input.nextLine());
 		   }
@@ -210,8 +196,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_validAllowLocalUrlFile));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     validAllowLocalUrls.add(_input.nextLine());
 		   }
@@ -233,8 +217,6 @@ protected void setUp() {
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalidAllowLocalUrlFile));
 		
-		   int i = 0;
-
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
 		     invalidAllowLocalUrls.add(_input.nextLine());
 		   }
