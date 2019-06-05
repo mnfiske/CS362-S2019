@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Performs Validation Test for url validations.
@@ -50,9 +51,8 @@ protected void setUp() {
 	   /********************************************************************/
 	   //Valid URLs
 	   UrlValidator urlValAllSchemes = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-	   int numValidUrls = 14;
-	   String fileToOpen = path + "\\validUrls.txt";
-	   String[] validUrls = new String[numValidUrls];
+	   String fileToOpen = "validUrls.txt";
+	   ArrayList<String> validUrls = new ArrayList<String>();
 	   File _validUrlSchemes = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_validUrlSchemes));
@@ -60,8 +60,8 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     validUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+			   validUrls.add(_input.nextLine());	//writes the entire line to _array[i]
+		     //i++;
 		   }
 		   
 		   _input.close();
@@ -70,14 +70,13 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < validUrls.length; i++)
+	   for(int i = 0; i < validUrls.size(); i++)
 	   {
-		   assertTrue(urlValAllSchemes.isValid(validUrls[i]));
+		   assertTrue(urlValAllSchemes.isValid(validUrls.get(i)));
 	   }
 	   //Invalid URLs
-	   int numInvalidUrls = 22;
-	   fileToOpen = path + "\\invalidUrls.txt";
-	   String[] invalidUrls = new String[numInvalidUrls];
+	   fileToOpen = "invalidUrls.txt";
+	   ArrayList<String> invalidUrls = new ArrayList<String>();
 	   File _invalidUrlSchemes = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalidUrlSchemes));
@@ -85,8 +84,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     invalidUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     invalidUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -95,18 +93,17 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < invalidUrls.length; i++)
+	   for(int i = 0; i < invalidUrls.size(); i++)
 	   {
-		   assertFalse(urlValAllSchemes.isValid(invalidUrls[i]));
+		   assertFalse(urlValAllSchemes.isValid(invalidUrls.get(i)));
 	   }
 	   /********************************************************************/
 	   /*Test with Allow two slashes*/
 	   /********************************************************************/
 	   //Valid URLs
 	   UrlValidator urlVal2Slashes = new UrlValidator(null, null, UrlValidator.ALLOW_2_SLASHES);
-	   int numValid2SlashUrls = 16;
-	   fileToOpen = path + "\\valid2SlashUrls.txt";
-	   String[] valid2SlashUrls = new String[numValid2SlashUrls];
+	   fileToOpen = "valid2SlashUrls.txt";
+	   ArrayList<String> valid2SlashUrls = new ArrayList<String>();
 	   File _valid2SlashUrlFile = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_valid2SlashUrlFile));
@@ -114,8 +111,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     valid2SlashUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     valid2SlashUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -124,14 +120,13 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < valid2SlashUrls.length; i++)
+	   for(int i = 0; i < valid2SlashUrls.size(); i++)
 	   {
-		   assertTrue(urlVal2Slashes.isValid(valid2SlashUrls[i]));
+		   assertTrue(urlVal2Slashes.isValid(valid2SlashUrls.get(i)));
 	   }
 	   //Invalid URLs
-	   int numInvalid2SlashUrls = 28;
-	   fileToOpen = path + "\\invalid2SlashUrls.txt";
-	   String[] invalid2SlashUrls = new String[numInvalid2SlashUrls];
+	   fileToOpen = "invalid2SlashUrls.txt";
+	   ArrayList<String> invalid2SlashUrls = new ArrayList<String>();
 	   File _invalid2SlashUrlFile = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalid2SlashUrlFile));
@@ -139,8 +134,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     invalid2SlashUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     invalid2SlashUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -149,9 +143,9 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < invalid2SlashUrls.length; i++)
+	   for(int i = 0; i < invalid2SlashUrls.size(); i++)
 	   {
-		   assertFalse(urlVal2Slashes.isValid(invalid2SlashUrls[i]));
+		   assertFalse(urlVal2Slashes.isValid(invalid2SlashUrls.get(i)));
 	   }
 	   
 	   /********************************************************************/
@@ -159,9 +153,8 @@ protected void setUp() {
 	   /********************************************************************/
 	   //Valid URLs
 	   UrlValidator urlValNoFrags = new UrlValidator(null, null, UrlValidator.NO_FRAGMENTS);
-	   int numValidNoFragsUrls = 9;
-	   fileToOpen = path + "\\validNoFragsUrls.txt";
-	   String[] validNoFragsUrls = new String[numValidNoFragsUrls];
+	   fileToOpen = "validNoFragsUrls.txt";
+	   ArrayList<String> validNoFragsUrls = new ArrayList<String>();
 	   File _validNoFragsUrlFile = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_validNoFragsUrlFile));
@@ -169,8 +162,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     validNoFragsUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     validNoFragsUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -179,14 +171,13 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < validNoFragsUrls.length; i++)
+	   for(int i = 0; i < validNoFragsUrls.size(); i++)
 	   {
-		   assertTrue(urlValNoFrags.isValid(validNoFragsUrls[i]));
+		   assertTrue(urlValNoFrags.isValid(validNoFragsUrls.get(i)));
 	   }
 	   //Invalid URLs
-	   int numInvalidNoFragsUrls = 26;
-	   fileToOpen = path + "\\invalidNoFragsUrls.txt";
-	   String[] invalidNoFragsUrls = new String[numInvalidNoFragsUrls];
+	   fileToOpen = "invalidNoFragsUrls.txt";
+	   ArrayList<String> invalidNoFragsUrls = new ArrayList<String>();
 	   File _invalidNoFragsUrlFile = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalidNoFragsUrlFile));
@@ -194,8 +185,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     invalidNoFragsUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     invalidNoFragsUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -204,9 +194,9 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < invalidNoFragsUrls.length; i++)
+	   for(int i = 0; i < invalidNoFragsUrls.size(); i++)
 	   {
-		   assertFalse(urlValNoFrags.isValid(invalidNoFragsUrls[i]));
+		   assertFalse(urlValNoFrags.isValid(invalidNoFragsUrls.get(i)));
 	   }
 	   
 	   /********************************************************************/
@@ -214,9 +204,8 @@ protected void setUp() {
 	   /********************************************************************/
 	   //Valid URLs
 	   UrlValidator urlValLocals = new UrlValidator(null, null, UrlValidator.ALLOW_LOCAL_URLS);
-	   int numValidAllowLocalUrls = 19;
-	   fileToOpen = path + "\\validAllowLocalUrls.txt";
-	   String[] validAllowLocalUrls = new String[numValidAllowLocalUrls];
+	   fileToOpen = "validAllowLocalUrls.txt";
+	   ArrayList<String> validAllowLocalUrls = new ArrayList<String>();
 	   File _validAllowLocalUrlFile = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_validAllowLocalUrlFile));
@@ -224,8 +213,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     validAllowLocalUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     validAllowLocalUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -234,14 +222,13 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < validAllowLocalUrls.length; i++)
+	   for(int i = 0; i < validAllowLocalUrls.size(); i++)
 	   {
-		   assertTrue(urlValLocals.isValid(validAllowLocalUrls[i]));
+		   assertTrue(urlValLocals.isValid(validAllowLocalUrls.get(i)));
 	   }
 	   //Invalid URLs
-	   int numInvalidAllowLocalUrls = 19;
-	   fileToOpen = path + "\\invalidAllowLocalUrls.txt";
-	   String[] invalidAllowLocalUrls = new String[numInvalidAllowLocalUrls];
+	   fileToOpen = "invalidAllowLocalUrls.txt";
+	   ArrayList<String> invalidAllowLocalUrls = new ArrayList<String>();
 	   File _invalidAllowLocalUrlFile = new File(fileToOpen);	//Reads the entire File at [filepath] into memory
 	   try {
 		Scanner _input = new Scanner(new FileReader(_invalidAllowLocalUrlFile));
@@ -249,8 +236,7 @@ protected void setUp() {
 		   int i = 0;
 
 		   while(_input.hasNextLine()) {	//Checks if the next line is EOF
-		     invalidAllowLocalUrls[i] = _input.nextLine();	//writes the entire line to _array[i]
-		     i++;
+		     invalidAllowLocalUrls.add(_input.nextLine());
 		   }
 		   
 		   _input.close();
@@ -259,9 +245,9 @@ protected void setUp() {
 		e.printStackTrace();
 	   } 
 	   
-	   for(int i = 0; i < invalidAllowLocalUrls.length; i++)
+	   for(int i = 0; i < invalidAllowLocalUrls.size(); i++)
 	   {
-		   assertFalse(urlValLocals.isValid(invalidAllowLocalUrls[i]));
+		   assertFalse(urlValLocals.isValid(invalidAllowLocalUrls.get(i)));
 	   }
 	   
    }
